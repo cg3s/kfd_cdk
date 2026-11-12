@@ -1,6 +1,17 @@
 const API_BASE = "https://kafuda.com/api/public/cdk";
 const POLL_INTERVAL_MS = 3000;
 const MAX_AUTOMATIC_POLLS = 100;
+const DEFAULT_SITE_NAME = "AI代充";
+const siteConfig = window.REDEMPTION_CONFIG ?? {};
+const siteTitle =
+  typeof siteConfig.siteTitle === "string" && siteConfig.siteTitle.trim()
+    ? siteConfig.siteTitle.trim()
+    : DEFAULT_SITE_NAME;
+const footerBrandName =
+  typeof siteConfig.footerBrandName === "string" &&
+  siteConfig.footerBrandName.trim()
+    ? siteConfig.footerBrandName.trim()
+    : DEFAULT_SITE_NAME;
 
 const codeForm = document.querySelector("#code-form");
 const sessionForm = document.querySelector("#session-form");
@@ -471,4 +482,6 @@ restartButton.addEventListener("click", () => {
 });
 
 document.querySelector("#year").textContent = new Date().getFullYear();
+document.title = siteTitle;
+document.querySelector("#footer-brand-name").textContent = footerBrandName;
 setStep("code");

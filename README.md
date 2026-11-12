@@ -1,18 +1,20 @@
-# CODETRADER 静态兑换页
+# 静态兑换页
 
 使用卡付达文档 §4「公开兑换接口（做法 A / B）」实现的纯静态兑换页。浏览器直接请求公开 API，不需要 Node.js 服务、`.env` 或商户 API 密钥。
 
-## aaPanel 静态部署
 
-1. 在 aaPanel 添加网站 `kfd.codetrader.xyz`，配置 DNS 解析并启用 HTTPS。
-2. 将以下三个文件上传到该网站根目录（例如 `/www/wwwroot/kfd.codetrader.xyz`）：
-   - `index.html`
-   - `app.js`
-   - `styles.css`
-3. 确认网站运行目录指向该目录，然后访问 `https://kfd.codetrader.xyz`。
-4. 在卡付达「我的 CDK → 品牌与兑换页 → 自建兑换页地址」登记来源 `https://kfd.codetrader.xyz`。本地开发时则登记实际使用的本地来源，例如 `http://localhost:5173`。
+## 网站名称配置
 
-不要将项目中的 `.env` 上传到网站目录；静态页面不读取该文件。如果它保存过 API 密钥，请将其保存在网站根目录之外。
+在 `config.js` 中设置浏览器标签页标题和页脚品牌名。默认都为“AI代充”：
+
+```js
+window.REDEMPTION_CONFIG = {
+  siteTitle: "AI代充",
+  footerBrandName: "AI代充",
+};
+```
+
+修改其中的值后，将更新后的 `config.js` 上传到网站根目录即可。
 
 请用 HTTP 静态服务器预览，不要通过 `file://` 打开 HTML。项目根目录运行：
 
