@@ -483,5 +483,6 @@ restartButton.addEventListener("click", () => {
 
 document.querySelector("#year").textContent = new Date().getFullYear();
 document.title = siteTitle;
+document.querySelector("#header-brand-name").textContent = footerBrandName;
 document.querySelector("#footer-brand-name").textContent = footerBrandName;
 setStep("code");
