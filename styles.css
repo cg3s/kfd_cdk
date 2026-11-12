@@ -285,12 +285,20 @@ h1 span {
   justify-content: space-between;
 }
 
-.label-row a {
+.help-button {
   margin-bottom: 9px;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--accent);
   font-size: 10px;
   font-weight: 600;
-  text-decoration: none;
+  cursor: pointer;
+}
+
+.help-button:hover {
+  color: var(--accent-dark);
+  text-decoration: underline;
 }
 
 .input-wrap {
@@ -579,6 +587,121 @@ h1 span {
 
 .text-button:hover {
   color: var(--accent);
+}
+
+.help-dialog {
+  width: min(100% - 32px, 430px);
+  max-width: 430px;
+  padding: 25px 26px 21px;
+  border: 1px solid rgba(52, 52, 45, 0.1);
+  border-radius: 16px;
+  background: #fff;
+  color: #252621;
+  box-shadow: 0 24px 80px rgba(35, 33, 27, 0.2);
+}
+
+.help-dialog::backdrop {
+  background: rgba(31, 31, 27, 0.42);
+  backdrop-filter: blur(3px);
+}
+
+.help-dialog-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.help-dialog-header h2 {
+  margin: 7px 0 0;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.dialog-close {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  background: #f5f4f0;
+  color: #777870;
+  font-size: 21px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dialog-close:hover {
+  background: #eeede7;
+  color: #34352f;
+}
+
+.help-steps {
+  display: grid;
+  gap: 20px;
+  margin: 24px 0 19px;
+  padding: 0;
+  list-style: none;
+}
+
+.help-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.help-step-number {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #f8eee9;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.help-steps li > div {
+  min-width: 0;
+}
+
+.help-steps strong {
+  display: block;
+  margin: 2px 0 5px;
+  color: #393a34;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.help-steps p {
+  margin: 0 0 8px;
+  color: #818179;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.help-steps a {
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.help-steps a:hover {
+  text-decoration: underline;
+}
+
+.help-dialog-note {
+  margin: 0;
+  padding: 10px 11px;
+  border-radius: 7px;
+  background: #f7f7f3;
+  color: #777870;
+  font-size: 9px;
+  line-height: 1.65;
 }
 
 .progress-panel {

@@ -10,7 +10,6 @@
     />
     <title>ChatGPT 套餐兑换</title>
     <link rel="stylesheet" href="./styles.css" />
-    <script type="module" src="./app.js?v=20261112-4"></script>
   </head>
   <body>
     <div class="page-shell">
@@ -84,11 +83,9 @@
             <div class="field-group session-field" id="session-step">
               <div class="label-row">
                 <label for="session">ChatGPT Session</label>
-                <a
-                  href="https://chatgpt.com/api/auth/session"
-                  target="_blank"
-                  rel="noreferrer"
-                >如何获取？</a>
+                <button class="help-button" id="session-help-button" type="button">
+                  如何获取？
+                </button>
               </div>
               <div class="input-wrap session-wrap">
                 <span class="input-icon" aria-hidden="true">
@@ -219,5 +216,49 @@
         <a href="https://codetrader.xyz">codetrader.xyz</a>
       </footer>
     </div>
+
+    <dialog class="help-dialog" id="session-help-dialog" aria-labelledby="help-title">
+      <div class="help-dialog-header">
+        <div>
+          <span class="step-kicker">SESSION GUIDE</span>
+          <h2 id="help-title">如何获取 Session</h2>
+        </div>
+        <button
+          class="dialog-close"
+          id="close-session-help"
+          type="button"
+          aria-label="关闭说明"
+        >×</button>
+      </div>
+      <ol class="help-steps">
+        <li>
+          <span class="help-step-number">1</span>
+          <div>
+            <strong>登录 ChatGPT</strong>
+            <p>在浏览器中打开 ChatGPT，并登录需要兑换套餐的账号。</p>
+            <a href="https://chatgpt.com" target="_blank" rel="noreferrer">
+              打开 chatgpt.com <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </li>
+        <li>
+          <span class="help-step-number">2</span>
+          <div>
+            <strong>打开 Session 页面并复制</strong>
+            <p>保持已登录状态，在新标签页打开下方地址，复制页面显示的完整内容并粘贴回来。</p>
+            <a
+              href="https://chatgpt.com/api/auth/session"
+              target="_blank"
+              rel="noreferrer"
+            >
+              打开 Session 地址 <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </li>
+      </ol>
+      <p class="help-dialog-note">Session 类似账号凭据，请勿分享给他人；完成验证后输入内容会自动清空。</p>
+    </dialog>
+
+    <script type="module" src="./app.js?v=20261112-5"></script>
   </body>
 </html>

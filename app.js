@@ -14,6 +14,9 @@ const backButton = document.querySelector("#back-button");
 const restartButton = document.querySelector("#restart-button");
 const statusButton = document.querySelector("#status-button");
 const toggleSessionButton = document.querySelector("#toggle-session");
+const sessionHelpButton = document.querySelector("#session-help-button");
+const sessionHelpDialog = document.querySelector("#session-help-dialog");
+const closeSessionHelpButton = document.querySelector("#close-session-help");
 const confirmationPanel = document.querySelector("#confirmation-panel");
 const progressPanel = document.querySelector("#progress-panel");
 const errorBox = document.querySelector("#form-error");
@@ -417,6 +420,20 @@ toggleSessionButton.addEventListener("click", () => {
     isVisible ? "显示 Session" : "隐藏 Session"
   );
   sessionInput.classList.toggle("is-visible", !isVisible);
+});
+
+sessionHelpButton.addEventListener("click", () => {
+  sessionHelpDialog.showModal();
+});
+
+closeSessionHelpButton.addEventListener("click", () => {
+  sessionHelpDialog.close();
+});
+
+sessionHelpDialog.addEventListener("click", (event) => {
+  if (event.target === sessionHelpDialog) {
+    sessionHelpDialog.close();
+  }
 });
 
 statusButton.addEventListener("click", async () => {
