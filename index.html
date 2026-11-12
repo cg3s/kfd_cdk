@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f5f2" />
+    <meta
+      name="description"
+      content="输入兑换卡密和 ChatGPT Session，安全完成套餐兑换。"
+    />
+    <title>ChatGPT 套餐兑换</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./app.js?v=20261112-4"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="首页">
+          <span class="brand-mark" aria-hidden="true">C</span>
+          <span class="brand-name">CODETRADER<span class="brand-dot">.</span></span>
+        </a>
+        <span class="help-link">安全兑换</span>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> SECURE REDEMPTION</div>
+          <h1 id="page-title">让你的账号<br /><span>即刻升级。</span></h1>
+          <p>先验证兑换卡密，再填写 ChatGPT Session 完成兑换。</p>
+        </section>
+
+        <section class="redeem-card" aria-label="套餐兑换">
+          <div class="card-heading">
+            <div>
+              <span class="step-kicker" id="step-kicker">STEP 01 / 03</span>
+              <h2 id="form-title">填写兑换信息</h2>
+            </div>
+            <div class="secure-badge">
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <rect x="4.25" y="8.5" width="11.5" height="8" rx="1.75"></rect>
+                <path d="M6.75 8.5V6.25a3.25 3.25 0 0 1 6.5 0V8.5M10 11.5v2"></path>
+              </svg>
+              安全连接
+            </div>
+          </div>
+
+          <form id="code-form" novalidate>
+            <div class="field-group" id="code-step">
+              <label for="code">兑换卡密</label>
+              <div class="input-wrap">
+                <span class="input-icon ticket-icon" aria-hidden="true">✳</span>
+                <input
+                  id="code"
+                  name="code"
+                  type="text"
+                  placeholder="例如 XXXX-XXXX-XXXX-XXXX"
+                  autocomplete="off"
+                  autocapitalize="characters"
+                  spellcheck="false"
+                  required
+                />
+              </div>
+              <p class="field-hint">先验证卡密状态，验证通过后再填写账号信息</p>
+            </div>
+
+            <button class="primary-button" id="code-check-button" type="submit">
+              <span>验证卡密</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+          </form>
+
+          <form id="session-form" novalidate hidden>
+            <div class="verified-code" id="verified-code">
+              <span class="verified-check" aria-hidden="true">✓</span>
+              <div>
+                <strong>卡密验证通过</strong>
+                <p><span id="verified-plan">—</span><span id="verified-expiry"></span></p>
+              </div>
+              <button class="change-code-button" id="change-code-button" type="button">
+                更换
+              </button>
+            </div>
+
+            <div class="field-group session-field" id="session-step">
+              <div class="label-row">
+                <label for="session">ChatGPT Session</label>
+                <a
+                  href="https://chatgpt.com/api/auth/session"
+                  target="_blank"
+                  rel="noreferrer"
+                >如何获取？</a>
+              </div>
+              <div class="input-wrap session-wrap">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20">
+                    <circle cx="10" cy="10" r="6.75"></circle>
+                    <path d="M7.5 10.1 9.2 12l3.6-4"></path>
+                  </svg>
+                </span>
+                <textarea
+                  id="session"
+                  name="session"
+                  class="session-input"
+                  rows="4"
+                  placeholder="粘贴完整 Session JSON 或 session-token"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  required
+                ></textarea>
+                <button
+                  class="visibility-button"
+                  id="toggle-session"
+                  type="button"
+                  aria-label="显示 Session"
+                  aria-pressed="false"
+                >
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M2.5 10s2.7-4.2 7.5-4.2 7.5 4.2 7.5 4.2-2.7 4.2-7.5 4.2S2.5 10 2.5 10Z"></path>
+                    <circle cx="10" cy="10" r="1.8"></circle>
+                  </svg>
+                </button>
+              </div>
+              <p class="field-hint">仅支持 ChatGPT Session，不支持 Access Token 或账号密码</p>
+            </div>
+
+            <div class="privacy-note" id="session-privacy">
+              <span class="privacy-icon" aria-hidden="true">↗</span>
+              <p>Session 仅用于本次验证，不会保存到本地；验证后会清空。</p>
+            </div>
+
+            <button class="primary-button" id="session-check-button" type="submit">
+              <span>检查账号</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+          </form>
+
+          <section class="confirmation-panel" id="confirmation-panel" hidden>
+            <div class="section-divider"></div>
+            <div class="account-row">
+              <div class="account-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="8" r="3.25"></circle>
+                  <path d="M5.5 19c.6-3 2.8-4.5 6.5-4.5s5.9 1.5 6.5 4.5"></path>
+                </svg>
+              </div>
+              <div class="account-copy">
+                <span class="detail-label">兑换账号</span>
+                <strong id="account-email">—</strong>
+              </div>
+              <span class="ready-tag" id="account-plan">—</span>
+            </div>
+            <div class="order-details">
+              <div>
+                <span class="detail-label">兑换套餐</span>
+                <strong id="plan-name">—</strong>
+              </div>
+              <div>
+                <span class="detail-label">账号当前套餐</span>
+                <strong id="current-plan">—</strong>
+              </div>
+              <div>
+                <span class="detail-label">兑换类型</span>
+                <strong id="redemption-kind">—</strong>
+              </div>
+              <div>
+                <span class="detail-label">卡密有效期</span>
+                <strong id="code-expiry">—</strong>
+              </div>
+            </div>
+            <p class="confirm-warning">
+              请确认兑换账号正确。确认后将提交开通请求，卡密会进入兑换流程。
+            </p>
+            <button class="primary-button" id="redeem-button" type="button">
+              <span>确认兑换</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+            <button class="text-button" id="back-button" type="button">返回修改信息</button>
+          </section>
+
+          <section class="progress-panel" id="progress-panel" aria-live="polite" hidden>
+            <div class="progress-visual" id="progress-visual" aria-hidden="true">
+              <span class="progress-orbit"></span>
+              <span class="progress-core">✓</span>
+            </div>
+            <span class="progress-kicker" id="progress-kicker">REDEMPTION STATUS</span>
+            <h3 id="progress-title">正在提交兑换</h3>
+            <p id="progress-message">请稍候，不要关闭此页面。</p>
+            <div class="progress-meta" id="progress-meta" hidden>
+              <span>套餐</span><strong id="progress-plan">—</strong>
+              <span>账号</span><strong id="progress-account">—</strong>
+            </div>
+            <button class="secondary-button" id="status-button" type="button" hidden>
+              查询最新进度 <span aria-hidden="true">↻</span>
+            </button>
+            <button class="text-button" id="restart-button" type="button" hidden>
+              返回兑换首页
+            </button>
+          </section>
+
+          <p class="form-error" id="form-error" role="alert" hidden></p>
+          <div class="card-footer">
+            <span class="footer-lock" aria-hidden="true">●</span>
+            Session 和卡密仅用于本次兑换，不会保存在此网页
+          </div>
+        </section>
+
+        <div class="trust-row" aria-label="兑换流程说明">
+          <div><span class="trust-number">01</span><span>验证卡密</span></div>
+          <span class="trust-line" aria-hidden="true"></span>
+          <div><span class="trust-number">02</span><span>确认账号</span></div>
+          <span class="trust-line" aria-hidden="true"></span>
+          <div><span class="trust-number">03</span><span>开始兑换</span></div>
+        </div>
+      </main>
+
+      <footer class="site-footer">
+        <span>© <span id="year"></span> CODETRADER REDEMPTION</span>
+        <a href="https://codetrader.xyz">codetrader.xyz</a>
+      </footer>
+    </div>
+  </body>
+</html>
