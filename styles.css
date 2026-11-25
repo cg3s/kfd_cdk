@@ -146,6 +146,16 @@ h1 span {
   line-height: 1.8;
 }
 
+.browser-notice {
+  width: min(100%, 496px);
+  margin: 0 auto 16px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent);
+  background: #fff3e9;
+  color: #763d26;
+  line-height: 1.5;
+}
+
 .redeem-card {
   width: min(100%, 496px);
   margin: 0 auto;

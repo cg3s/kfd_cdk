@@ -481,6 +481,19 @@ restartButton.addEventListener("click", () => {
   setStep("code");
 });
 
+function isGoogleChrome() {
+  const ua = navigator.userAgent;
+  if (navigator.brave || /Edg(?:e|A|iOS)?\/|OPR\/|SamsungBrowser\/|Vivaldi\/|MicroMessenger|QQBrowser|UCBrowser|;\s*wv\)/i.test(ua)) {
+    return false;
+  }
+  const brands = navigator.userAgentData?.brands;
+  if (brands?.length) {
+    return brands.some(({ brand }) => brand === "Google Chrome");
+  }
+  return /\bCriOS\//.test(ua) || /\bChrome\/[\d.]+ (?:Mobile )?Safari\/[\d.]+$/.test(ua);
+}
+
+document.querySelector("#browser-notice").hidden = isGoogleChrome();
 document.querySelector("#year").textContent = new Date().getFullYear();
 document.title = siteTitle;
 document.querySelector("#header-brand-name").textContent = footerBrandName;
