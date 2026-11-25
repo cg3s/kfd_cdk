@@ -493,7 +493,10 @@ function isGoogleChrome() {
   return /\bCriOS\//.test(ua) || /\bChrome\/[\d.]+ (?:Mobile )?Safari\/[\d.]+$/.test(ua);
 }
 
-document.querySelector("#browser-notice").hidden = isGoogleChrome();
+const chromeBrowser = isGoogleChrome();
+document.querySelector("#browser-notice").hidden = chromeBrowser;
+codeInput.disabled = !chromeBrowser;
+codeCheckButton.disabled = !chromeBrowser;
 document.querySelector("#year").textContent = new Date().getFullYear();
 document.title = siteTitle;
 document.querySelector("#header-brand-name").textContent = footerBrandName;
